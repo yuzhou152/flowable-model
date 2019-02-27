@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="signaltask-sequential" name="单任务-串行Demo" isExecutable="true">
+    <documentation>单任务-串行Demo</documentation>
+    <startEvent id="startEvent1"></startEvent>
+    <sequenceFlow id="sid-C47DADBD-797B-42C9-84E9-9CCE97182D99" sourceRef="startEvent1" targetRef="sid-412D07CE-9DF7-44F5-A5B7-797325821BA3"></sequenceFlow>
+    <endEvent id="sid-F69AEA01-3FA9-4213-B755-4B65C9825EDF"></endEvent>
+    <userTask id="sid-192F324D-5AEC-4594-A3E8-D6D5A5B505E4" name="multi task" flowable:assignee="${assignee}" flowable:category="/home/workbench/task/task1/">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="true" flowable:collection="assigneeList" flowable:elementVariable="assignee"></multiInstanceLoopCharacteristics>
+    </userTask>
+    <scriptTask id="sid-412D07CE-9DF7-44F5-A5B7-797325821BA3" name="define executor" scriptFormat="groovy" flowable:autoStoreVariables="false">
+      <script><![CDATA[execution.setVariable("assigneeList", ["user2-1","user2-2","user3-1"]);]]></script>
+    </scriptTask>
+    <sequenceFlow id="sid-D36C7955-D4DA-4391-AD12-CA54C4ACC48E" sourceRef="sid-412D07CE-9DF7-44F5-A5B7-797325821BA3" targetRef="sid-192F324D-5AEC-4594-A3E8-D6D5A5B505E4"></sequenceFlow>
+    <sequenceFlow id="sid-8B46C2DA-0830-449C-9971-109502D5BDC8" sourceRef="sid-192F324D-5AEC-4594-A3E8-D6D5A5B505E4" targetRef="sid-F69AEA01-3FA9-4213-B755-4B65C9825EDF"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_signaltask-sequential">
+    <bpmndi:BPMNPlane bpmnElement="signaltask-sequential" id="BPMNPlane_signaltask-sequential">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="210.00000000000003" y="285.9999973509048"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-F69AEA01-3FA9-4213-B755-4B65C9825EDF" id="BPMNShape_sid-F69AEA01-3FA9-4213-B755-4B65C9825EDF">
+        <omgdc:Bounds height="28.0" width="28.0" x="730.2222383081182" y="286.0000000000002"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-192F324D-5AEC-4594-A3E8-D6D5A5B505E4" id="BPMNShape_sid-192F324D-5AEC-4594-A3E8-D6D5A5B505E4">
+        <omgdc:Bounds height="80.0" width="99.99999999999994" x="510.00000000000006" y="260.9999973509047"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-412D07CE-9DF7-44F5-A5B7-797325821BA3" id="BPMNShape_sid-412D07CE-9DF7-44F5-A5B7-797325821BA3">
+        <omgdc:Bounds height="80.0" width="100.0" x="330.77776169188195" y="256.99999735090466"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-D36C7955-D4DA-4391-AD12-CA54C4ACC48E" id="BPMNEdge_sid-D36C7955-D4DA-4391-AD12-CA54C4ACC48E">
+        <omgdi:waypoint x="430.7277616918808" y="298.11481436181884"></omgdi:waypoint>
+        <omgdi:waypoint x="510.00000000000006" y="299.8840644070467"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-8B46C2DA-0830-449C-9971-109502D5BDC8" id="BPMNEdge_sid-8B46C2DA-0830-449C-9971-109502D5BDC8">
+        <omgdi:waypoint x="609.9499999999892" y="300.7285867546357"></omgdi:waypoint>
+        <omgdi:waypoint x="730.2224374005717" y="300.0757226432934"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-C47DADBD-797B-42C9-84E9-9CCE97182D99" id="BPMNEdge_sid-C47DADBD-797B-42C9-84E9-9CCE97182D99">
+        <omgdi:waypoint x="239.9496254085514" y="300.892687123295"></omgdi:waypoint>
+        <omgdi:waypoint x="330.7777616918807" y="300.2428849675129"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
